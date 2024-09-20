@@ -1,0 +1,74 @@
+package com.company;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Destination {
+    String name;
+    String date;
+    String preferences;
+
+    Destination(String name, String date, String preferences) {
+        this.name = name;
+        this.date = date;
+        this.preferences = preferences;
+    }
+}
+
+class Itinerary {
+    ArrayList<Destination> destinations = new ArrayList<>();
+    double budget;
+
+    void addDestination(Destination destination) {
+        destinations.add(destination);
+    }
+
+    void setBudget(double budget) {
+        this.budget = budget;
+    }
+
+    void displayItinerary() {
+        System.out.println("Travel Itinerary:");
+        for (Destination destination : destinations) {
+            System.out.println("Destination: " + destination.name);
+            System.out.println("Date: " + destination.date);
+            System.out.println("Preferences: " + destination.preferences);
+            // Placeholder for map and weather information
+            System.out.println("Map: [Map URL]");
+            System.out.println("Weather: [Weather Info]");
+            System.out.println();
+        }
+        System.out.println("Total Budget: " + budget);
+    }
+}
+
+public class Task3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Itinerary itinerary = new Itinerary();
+
+        System.out.println("Enter your budget:");
+        double budget = scanner.nextDouble();
+        itinerary.setBudget(budget);
+
+        boolean addMore = true;
+        while (addMore) {
+            System.out.println("Enter destination name:");
+            String name = scanner.next();
+            System.out.println("Enter travel date (YYYY-MM-DD):");
+            String date = scanner.next();
+            System.out.println("Enter your preferences:");
+            String preferences = scanner.next();
+
+            Destination destination = new Destination(name, date, preferences);
+            itinerary.addDestination(destination);
+
+            System.out.println("Do you want to add another destination? (yes/no)");
+            String response = scanner.next();
+            addMore = response.equalsIgnoreCase("yes");
+        }
+
+        itinerary.displayItinerary();
+        scanner.close();
+    }
+}
